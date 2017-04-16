@@ -1,8 +1,6 @@
 package io.iamkyu.article;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
@@ -11,15 +9,16 @@ import java.time.OffsetDateTime;
  * @author Kj Nam
  * @since 2017-04-08
  */
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Article {
     private Long id;
     private String title;
     private String author;
     private String body;
     private Timestamp created;
+
+    public Article() {
+    }
 
     public Article(Long id, String title, String author, String body) {
         this.id = id;
