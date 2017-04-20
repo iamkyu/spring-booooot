@@ -1,27 +1,32 @@
 <html>
 <head>
     <title>Article</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
+<style>
+</style>
 <body>
     <div>
-        <h1>글쓰기</h1>
-        <form action="/article" method="post">
+        <h1>write</h1>
+        <form action="/article/create" method="post">
             <table>
                 <tr>
-                    <th>글번호</th>
+                    <th>NO</th>
                     <td><input type="text" name="id"></td>
                 </tr>
                 <tr>
-                    <th>제목</th>
+                    <th>TITLE</th>
                     <td><input type="text" name="title"></td>
                 </tr>
                 <tr>
-                    <th>작성자</th>
+                    <th>AUTHOR</th>
                     <td><input type="text" name="author"></td>
                 </tr>
                 <tr>
-                    <th>내용</th>
-                    <td><input type="text" name="body"></td>
+                    <th>BODY</th>
+                    <td>
+                        <textarea name="body"></textarea>
+                    </td>
                 </tr>
             </table>
             <div><input type="submit"></div>

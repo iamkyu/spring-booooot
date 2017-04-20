@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticleCreateRequest {
+class ArticleCreateRequest {
     /**
      * ArticleCreateRequest 의 용도.
      * Article 에서 created 라는 게시물의 작성일자는 객체 내부적으로 처리한다.

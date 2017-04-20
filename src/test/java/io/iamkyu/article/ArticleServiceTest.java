@@ -24,7 +24,7 @@ public class ArticleServiceTest {
 
     @Before
     public void setUp() {
-        articleService.deleteAll();
+//        articleService.deleteAll();
     }
 
     @Test
@@ -62,5 +62,12 @@ public class ArticleServiceTest {
         assertThat(article.getAuthor(), is("my-author"));
         assertThat(article.getBody(), is("my-body"));
         assertThat(article.getCreated(), notNullValue());
+    }
+
+    @Test
+    public void 게시물_리스트를_가져온다() {
+        //given
+        //when
+        //then
     }
 }
