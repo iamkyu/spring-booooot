@@ -1,5 +1,6 @@
 package io.iamkyu.article;
 
+import io.iamkyu.paging.Page;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,14 +32,14 @@ public class ArticleServiceTest {
     public void 게시물을_작성한다() {
         //given
         ArticleCreateRequest request = new ArticleCreateRequest(
-                1L, "my-title", "my-author", "my-body"
+                100L, "my-title", "my-author", "my-body"
         );
 
         //when
         Article article = articleService.createArticle(request);
 
         //then
-        assertThat(article.getId(), is(1L));
+        assertThat(article.getId(), is(100L));
         assertThat(article.getTitle(), is("my-title"));
         assertThat(article.getAuthor(), is("my-author"));
         assertThat(article.getBody(), is("my-body"));
@@ -49,15 +50,15 @@ public class ArticleServiceTest {
     public void 게시물을_조회한다() {
         //given
         ArticleCreateRequest request = new ArticleCreateRequest(
-                1L, "my-title", "my-author", "my-body"
+                101L, "my-title", "my-author", "my-body"
         );
         articleService.createArticle(request);
 
         //when
-        Article article = articleService.getArticle(1L);
+        Article article = articleService.getArticle(101L);
 
         //then
-        assertThat(article.getId(), is(1L));
+        assertThat(article.getId(), is(101L));
         assertThat(article.getTitle(), is("my-title"));
         assertThat(article.getAuthor(), is("my-author"));
         assertThat(article.getBody(), is("my-body"));
@@ -65,9 +66,15 @@ public class ArticleServiceTest {
     }
 
     @Test
-    public void 게시물_리스트를_가져온다() {
+    public void 한_페이지에는_10개의_게시글이_있다() {
         //given
+        final int PAGE_NUMBER = 1;
+
         //when
+        Page<Article> page = articleService.findAll(PAGE_NUMBER);
+
         //then
+        assertThat(page.getNumber()+1, is(1));
+        assertThat(page.getSize(), is(10));
     }
 }
