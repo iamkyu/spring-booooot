@@ -3,8 +3,7 @@ package io.iamkyu.article;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 /**
  * @author Kj Nam
@@ -17,17 +16,13 @@ public class Article {
     private String title;
     private String author;
     private String body;
-    private Timestamp created;
+    private LocalDateTime created;
 
     public Article(Long id, String title, String author, String body) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.body = body;
-
-        /**
-         * @see http://stackoverflow.com/questions/30651210/convert-offsetdatetime-to-utc-timestamp
-         */
-        this.created = new Timestamp(1000 * OffsetDateTime.now().toEpochSecond());
+        this.created = LocalDateTime.now();
     }
 }

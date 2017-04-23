@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ class ArticleRepository<T> {
                         article.getTitle(),
                         article.getAuthor(),
                         article.getBody(),
-                        article.getCreated());
+                        Timestamp.valueOf(article.getCreated()));
     }
 
     Article get(Long id) {
@@ -37,7 +38,7 @@ class ArticleRepository<T> {
                     article.setTitle(rs.getString("TITLE"));
                     article.setAuthor(rs.getString("AUTHOR"));
                     article.setBody(rs.getString("BODY"));
-                    article.setCreated(rs.getTimestamp("CREATED"));
+                    article.setCreated(rs.getTimestamp("CREATED").toLocalDateTime());
                     return article;
                 });
     }
@@ -70,7 +71,7 @@ class ArticleRepository<T> {
                     article.setTitle(rs.getString("title"));
                     article.setAuthor(rs.getString("author"));
                     article.setBody(rs.getString("body"));
-                    article.setCreated(rs.getTimestamp("created"));
+                    article.setCreated(rs.getTimestamp("created").toLocalDateTime());
                     return article;
                 });
 
