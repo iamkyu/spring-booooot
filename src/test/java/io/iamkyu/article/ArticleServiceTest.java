@@ -66,6 +66,25 @@ public class ArticleServiceTest {
     }
 
     @Test
+    public void 게시물을_조회한다_assert_j() {
+        //given
+        ArticleCreateRequest request = new ArticleCreateRequest(
+                101L, "my-title", "my-author", "my-body"
+        );
+        articleService.createArticle(request);
+
+        //when
+        Article article = articleService.getArticle(101L);
+
+        //then
+        //generate command: mvn assertj:generate-assertions
+        ArticleAssert.assertThat(article)
+                .hasAuthor("my-author")
+                .hasTitle("my-title")
+                .hasBody("my-body");
+    }
+
+    @Test
     public void 한_페이지에는_10개의_게시글이_있다() {
         //given
         final int PAGE_NUMBER = 1;
