@@ -1,5 +1,8 @@
-package io.iamkyu.article;
+package io.iamkyu.article.controller;
 
+import io.iamkyu.article.dto.ArticleCreateRequest;
+import io.iamkyu.article.model.Article;
+import io.iamkyu.article.service.ArticleService;
 import io.iamkyu.paging.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +23,8 @@ import java.util.List;
  */
 @Controller
 public class ArticleController {
-    @Autowired ArticleService service;
+    @Autowired
+    ArticleService service;
 
     @GetMapping("/article")
     public String index() {

@@ -1,4 +1,4 @@
-package io.iamkyu.article;
+package io.iamkyu.article.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-class ArticleCreateRequest {
+public class ArticleCreateRequest {
     /**
      * ArticleCreateRequest 의 용도.
      * Article 에서 created 라는 게시물의 작성일자는 객체 내부적으로 처리한다.

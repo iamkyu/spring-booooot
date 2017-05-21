@@ -1,5 +1,6 @@
-package io.iamkyu.article;
+package io.iamkyu.article.infrastructure;
 
+import io.iamkyu.article.model.Article;
 import io.iamkyu.paging.Page;
 import io.iamkyu.paging.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ import java.util.List;
  * @since 2017-04-08
  */
 @Repository
-class ArticleRepository<T> {
+public class ArticleJdbcRepository<T> {
     @Autowired DataSource dataSource;
 
-    void add(Article article) {
+    public void add(Article article) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "INSERT INTO ARTICLE (ID, TITLE, AUTHOR, BODY, CREATED) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
@@ -29,7 +30,7 @@ class ArticleRepository<T> {
                         Timestamp.valueOf(article.getCreated()));
     }
 
-    Article get(Long id) {
+    public Article get(Long id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "SELECT ID, TITLE, AUTHOR, BODY, CREATED FROM ARTICLE WHERE ID = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, i) -> {
@@ -43,7 +44,7 @@ class ArticleRepository<T> {
                 });
     }
 
-    void deleteAll() {
+    public void deleteAll() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "DELETE FROM ARTICLE";
         jdbcTemplate.update(sql);
@@ -57,7 +58,7 @@ class ArticleRepository<T> {
         return total;
     }
 
-    Page<T> findAll(Pageable pageable) {
+    public Page<T> findAll(Pageable pageable) {
         int first = pageable.getPageNumber() * pageable.getPageSize();
         int max = pageable.getPageSize();
 

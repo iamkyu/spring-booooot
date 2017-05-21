@@ -1,5 +1,8 @@
-package io.iamkyu.article;
+package io.iamkyu.article.service;
 
+import io.iamkyu.article.infrastructure.ArticleJdbcRepository;
+import io.iamkyu.article.model.Article;
+import io.iamkyu.article.dto.ArticleCreateRequest;
 import io.iamkyu.paging.Page;
 import io.iamkyu.paging.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,29 +13,28 @@ import org.springframework.stereotype.Service;
  * @since 2017-04-08
  */
 @Service
-class ArticleService {
-    @Autowired private ArticleRepository repository;
+public class ArticleService {
+    @Autowired private ArticleJdbcRepository repository;
     
     private final int SIZE_EACH_PAGE = 10;
 
-    Article createArticle(ArticleCreateRequest request) {
+    public Article createArticle(ArticleCreateRequest request) {
         Article article = new Article(
-                request.getId(), request.getTitle(),
-                request.getAuthor(), request.getBody()
+                request.getTitle(), request.getAuthor(), request.getBody()
         );
         repository.add(article);
         return article;
     }
 
-    Article getArticle(long articleId) {
+    public Article getArticle(long articleId) {
         return repository.get(articleId);
     }
 
-    void deleteAll() {
+    public void deleteAll() {
         repository.deleteAll();
     }
 
-    Page<Article> findAll(Integer pageNumber) {
+    public Page<Article> findAll(Integer pageNumber) {
         PageRequest request = new PageRequest(pageNumber - 1, SIZE_EACH_PAGE);
         Page<Article> page = repository.findAll(request);
 
